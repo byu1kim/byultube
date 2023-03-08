@@ -6,6 +6,8 @@ import { localsMiddleware } from "./middlewares";
 import globalRouter from "./routers/globalRouter";
 import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
+import apiRouter from "./routers/apiRouter";
+import flash from "express-flash";
 
 const app = express();
 
@@ -20,6 +22,9 @@ app.use(logger);
 
 // To use req.body
 app.use(express.urlencoded({ extended: true }));
+
+// To convert json
+app.use(express.json());
 
 // Session
 app.use(
@@ -46,6 +51,7 @@ app.use(
 //   return res.send(`${req.session.id} ${req.session.potato}`);
 // });
 
+app.use(flash());
 app.use(localsMiddleware);
 
 // To access img files under uploads
@@ -56,5 +62,6 @@ app.use("/static", express.static("assets"));
 app.use("/", globalRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
+app.use("/api", apiRouter);
 
 export default app;
