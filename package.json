@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "babel src -d build",
+    "start": "node build/app.js",
     "dev": "nodemon",
     "assets": "webpack"
   },
