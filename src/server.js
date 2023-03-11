@@ -11,14 +11,9 @@ import flash from "express-flash";
 
 const app = express();
 
-/* Middlewares */
 // View engine
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
-
-// Morgan
-const logger = morgan("dev");
-app.use(logger);
 
 // To use req.body
 app.use(express.urlencoded({ extended: true }));
@@ -32,30 +27,20 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      maxAge: 20000,
-    },
+    // cookie: {
+    //   maxAge: 200000,
+    // },
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
 
-// app.use((req, res, next) => {
-//   req.sessionStore.all((error, sessions) => {
-//     console.log(sessions);
-//     next();
-//   });
-// });
-
-// app.get("/add-one", (req, res, next) => {
-//   req.session.potato += 1;
-//   return res.send(`${req.session.id} ${req.session.potato}`);
-// });
-
+// Flash message
 app.use(flash());
+
+// Multer, Protect pages
 app.use(localsMiddleware);
 
-// To access img files under uploads
-app.use("/uploads", express.static("uploads"));
+// To access static files
 app.use("/static", express.static("assets"));
 
 // Routers

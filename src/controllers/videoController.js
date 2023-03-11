@@ -2,13 +2,13 @@ import Video from "../models/Video";
 import User from "../models/User";
 import Comment from "../models/Comment";
 
+// Home Page
 export const home = async (req, res) => {
   const videos = await Video.find({}).sort({ createdAt: "desc" }).populate("owner");
-  console.log(videos);
   return res.render("home", { pageTitle: "Home", videos });
 };
 
-// READ
+// Video Details
 export const watch = async (req, res) => {
   const { id } = req.params;
   //const owner = await User.findById(video.owner);
@@ -20,7 +20,47 @@ export const watch = async (req, res) => {
   return res.render("watch", { pageTitle: video.title, video });
 };
 
-// UPDATE
+// GET : Create Video
+export const getUpload = (req, res) => {
+  return res.render("upload", { pageTitle: "Upload Video" });
+};
+
+// POST : Create Video
+export const postUpload = async (req, res) => {
+  const {
+    user: { _id },
+  } = req.session;
+  const { location: fileUrl } = req.file;
+  const { title, description, hashtags } = req.body;
+
+  try {
+    // Create Video Object
+    const newVideo = await Video.create({
+      title,
+      description,
+      fileUrl,
+      owner: _id,
+      hashtags: Video.formatHashtags(hashtags),
+    });
+
+    // Add User reference to the Video Model
+    const user = await User.findById(_id);
+    user.videos.push(newVideo._id);
+    user.save();
+
+    return res.redirect("/");
+  } catch (error) {
+    // Error handle with re-render page
+    console.log(error);
+    return res.status(400).render("upload", {
+      pageTitle: "Upload Video",
+      video: { title, description, hashtags },
+      errorMessage: error._message,
+    });
+  }
+};
+
+// GET : Video Edit
 export const getEdit = async (req, res) => {
   const { id } = req.params;
   const {
@@ -37,6 +77,7 @@ export const getEdit = async (req, res) => {
   return res.render("edit", { pageTitle: `Edit: ${video.title}`, video });
 };
 
+// POST : Video Edit
 export const postEdit = async (req, res) => {
   const { id } = req.params;
   const {
@@ -60,39 +101,7 @@ export const postEdit = async (req, res) => {
   return res.redirect(`/videos/${id}`);
 };
 
-// CREATE
-export const getUpload = (req, res) => {
-  return res.render("upload", { pageTitle: "Upload Video" });
-};
-
-export const postUpload = async (req, res) => {
-  const {
-    user: { _id },
-  } = req.session;
-  const { path: fileUrl } = req.file;
-  const { title, description, hashtags } = req.body;
-  try {
-    const newVideo = await Video.create({
-      title,
-      description,
-      fileUrl,
-      owner: _id,
-      hashtags: Video.formatHashtags(hashtags),
-    });
-    const user = await User.findById(_id);
-    user.videos.push(newVideo._id);
-    user.save();
-    return res.redirect("/");
-  } catch (error) {
-    console.log(error);
-    return res.status(400).render("upload", {
-      pageTitle: "Upload Video",
-      errorMessage: error._message,
-    });
-  }
-};
-
-// DELETE
+// GET Delete
 export const deleteVideo = async (req, res) => {
   const { id } = req.params;
   const {

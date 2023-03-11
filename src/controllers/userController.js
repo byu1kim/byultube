@@ -3,8 +3,10 @@ import Video from "../models/Video";
 import bcrypt from "bcrypt";
 import fetch from "node-fetch";
 
-// CREATE
+// GET Register
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
+
+// POST Register
 export const postJoin = async (req, res) => {
   const { name, username, email, password, password2, location } = req.body;
   const pageTitle = "Join";
@@ -44,9 +46,10 @@ export const postJoin = async (req, res) => {
   }
 };
 
-// LOGIN
+// GET Login
 export const getLogin = (req, res) => res.render("login", { pageTitle: "Login" });
 
+// POST Login
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   const pageTitle = "Login";
@@ -146,11 +149,12 @@ export const logout = (req, res) => {
   return res.redirect("/");
 };
 
-// UPDATE : Edit
+// GET Edit Profile
 export const getEdit = (req, res) => {
   return res.render("edit-profile", { pageTitle: "Edit Profile" });
 };
 
+// POST Edit Profile
 export const postEdit = async (req, res) => {
   const {
     session: {
@@ -163,7 +167,7 @@ export const postEdit = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      avatarUrl: file ? file.path : avatarUrl,
+      avatarUrl: file ? file.location : avatarUrl,
       name,
       email,
       username,

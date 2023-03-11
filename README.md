@@ -1,14 +1,19 @@
-✔️ GIT
+# Todo
 
-0. New folder in local machine
-1. New repository in Github
-2. Terminal (One at a time)
-   $ git clone [git url]
-   $ git remote add orgin [git url]
-   $ git remote -v
-   $ git pus -u orgin main
-3. Whenever changes
-   $ git status
-   $ git add .
-   $ git commit -m "Message"
-   $ git push
+- [ ] s3
+- [v] session time
+- [ ] mobile style
+- [ ] desktop style
+- [ ] comment crud
+- [ ] separte recording and uploading
+- [ ] add profile image in home
+- [ ] add tags on the top
+- [ ] profile to my channel
+- [ ] video upload on your studio page
+- [ ] file converter
+- [ ] send status code
+- [ ] like/dislike
+- [ ] subscribe (follwer/follow)
+- [ ] download
+- [ ] home : add created
+- [ ] register : add image upload
