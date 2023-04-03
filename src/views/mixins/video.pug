@@ -2,7 +2,9 @@ mixin video(video)
   a.video-mixin(href=`/videos/${video.id}`)
     .video-mixin__thumb
     .video-mixin__data
-      span.video-mixin__title= video.title
+      .video-photo
       .video-mixin__meta
-        span #{ video.owner.name } •
-        span #{ video.meta.views } views
+        span.video-mixin__title= video.title
+        div #{ video.owner.name }
+        span #{ video.meta.views } views •
+        span Created Date

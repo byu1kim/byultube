@@ -122,3 +122,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+html {
+  box-sizing: border-box;
+}
+
+html * {
+  box-sizing: inherit;
+}

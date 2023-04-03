@@ -17,3 +17,7 @@
 - [ ] download
 - [ ] home : add created
 - [ ] register : add image upload
+
+- [ ] tags on the top
+- [ ] responsive
+- [ ] dark/light mode
