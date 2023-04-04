@@ -1,20 +1,22 @@
-.editprofile {
+.login,
+.signup {
   display: flex;
   justify-content: center;
+  align-items: center;
 
+  height: calc(100vh - 100px);
   .box {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
     width: 100%;
     max-width: 600px;
-    img {
-      border-radius: 50%;
-    }
     h1 {
       font-size: 1.8rem;
-      margin-bottom: 1rem;
     }
     form {
       width: 100%;
@@ -22,11 +24,6 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      label {
-        text-align: center;
-        font-weight: 700;
-        font-size: 18px;
-      }
       input {
         width: 100%;
         border: 1px solid lightgray;
@@ -49,12 +46,24 @@
       }
     }
     .regi {
+      border-bottom: 1px solid lightgray;
+      padding-bottom: 2rem;
       a {
+        margin-left: 5px;
         color: royalblue;
         &:hover {
           color: mediumblue;
         }
       }
+    }
+  }
+}
+
+.signup {
+  .box {
+    .regi {
+      border: none;
+      padding: 0;
     }
   }
 }

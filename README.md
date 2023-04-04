@@ -1,14 +1,42 @@
+# Byultube
+
+Youtube clone app built in Node.js
+(Thumbnail)
+
+## Technologies
+
+- Node.js
+- Pug
+- Sass
+- MongoDB
+- Deployment : ?
+
+## Featuers
+
+- Authentication with Passport.js
+- Updoad video
+- Record video (web cam only)
+- Cutomized video player
+- Upload profile image
+- Video CRUD
+- Comments CRUD
+- Image/Video are stored in AWS S3 bucket
+
+## Deployed website
+
+[url](url)
+
 # Todo
 
 - [ ] s3
 - [v] session time
-- [ ] mobile style
-- [ ] desktop style
+- [v] mobile style
+- [v] desktop style
 - [ ] comment crud
 - [ ] separte recording and uploading
-- [ ] add profile image in home
+- [v] add profile image in home
 - [ ] add tags on the top
-- [ ] profile to my channel
+- [v] profile to my channel
 - [ ] video upload on your studio page
 - [ ] file converter
 - [ ] send status code
@@ -17,7 +45,19 @@
 - [ ] download
 - [ ] home : add created
 - [ ] register : add image upload
+- [ ] delete video
+- [ ] admin function
+- [ ] thumbnail
 
-- [ ] tags on the top
-- [ ] responsive
+- [v] responsive
 - [ ] dark/light mode
+
+- [ ] video player controller
+
+##### Styles
+
+- [ ] view profile
+- [ ] video detail
+- [ ] video comments
+- [ ] record video
+- [ ] upload video

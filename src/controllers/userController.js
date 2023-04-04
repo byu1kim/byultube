@@ -163,20 +163,23 @@ export const postEdit = async (req, res) => {
     body: { name, email, username, location },
     file,
   } = req;
-  console.log(file);
-  const updatedUser = await User.findByIdAndUpdate(
-    _id,
-    {
-      avatarUrl: file ? file.location : avatarUrl,
-      name,
-      email,
-      username,
-      location,
-    },
-    { new: true }
-  );
-  req.session.user = updatedUser;
-  req.flash("error", "Can't change password.");
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      _id,
+      {
+        avatarUrl: file ? file.location : avatarUrl,
+        name,
+        email,
+        username,
+        location,
+      },
+      { new: true }
+    );
+    req.session.user = updatedUser;
+    req.flash("success", "Profile updated successfully");
+  } catch (e) {
+    req.flash("error", `Error: ${e}`);
+  }
   return res.redirect("/users/edit");
 };
 

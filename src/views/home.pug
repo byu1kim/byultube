@@ -2,6 +2,9 @@ extends layouts/main
 include mixins/video
 
 block content
+  .tags
+    .tag Tag1
+    .tag Tag2
   .video-grid
     each video in videos
       +video(video)

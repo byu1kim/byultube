@@ -1,3 +1,11 @@
 import "../scss/styles.scss";
 import "regenerator-runtime";
-console.log("hi");
+
+const profile = document.getElementById("profile");
+const dropdown = document.getElementById("dropdown");
+
+const handleProfile = () => {
+  dropdown.classList.toggle("show");
+};
+
+profile.addEventListener("click", handleProfile);

@@ -1,32 +1,37 @@
 header
-  .i.fas.fa-bars
-  a.header__logo(href="/")
-    i.fab.fa-youtube
+  .menu
+    .fas.fa-bars.menubar
+    a.header__logo(href="/")
+      i.fab.fa-youtube
   .search
     form.search-form
       input(name="search")
       button.i.fas.fa-search
-    a(href="/search")
-
   nav
-    ul
-      if loggedIn
+    if loggedIn
+      ul#dropdown.dropdown
+        li Hello,
+          |
+          |
+          span= loggedInUser.username
+          span !
         li
-          a(href="/videos/upload")
-            i.fas.fa-video
+          a(href=`/users/${loggedInUser._id}`) Your channel
         li
           a(href="/users/edit") Edit Profile
         li
-          a(href="/users/logout") Log Out
-
+          a(href="/users/logout") Sign Out
+      ul.profile
         li
-          a(href=`/users/${loggedInUser._id}`)
-            if loggedInUser.avatarUrl === ""
-              span 😀
-            else
-              img.header__avatar(src="/" + loggedInUser.avatarUrl)
-      else
+          a(href="/videos/upload")
+            i.fas.fa-video
+        li#profile.photo
+          if loggedInUser.avatarUrl === ""
+            span 😀
+          else
+            img.header__avatar(src=loggedInUser.avatarUrl)
+    else
+      ul
         li
-          a(href="/login") Login
-        li
-          a.header__btn(href="/join") Join
+          a.header__btn(href="/login") Sign in
+          //- a(href=`/users/${loggedInUser._id}`)

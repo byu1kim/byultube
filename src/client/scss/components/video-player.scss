@@ -5,46 +5,77 @@
     width: 100%;
   }
   .videoControls {
-    opacity: 0;
+    width: 100%;
     transition: opacity 0.5s ease-in-out;
-    &.showing {
-      opacity: 1;
-    }
-    align-items: center;
-    border-radius: 10px;
+    // &.showing {
+    //   display: none;
+    //   opacity: 1;
+    // }
     position: absolute;
-    bottom: 10px;
-    width: 95%;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 4fr 1fr auto;
-    gap: 10px;
+    bottom: 0;
+    display: flex;
     justify-content: space-between;
-    background-color: #0f1117;
     padding: 10px;
-    left: 0;
-    box-sizing: border-box;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+
     .videoControls__play {
       display: flex;
       align-items: center;
       justify-content: space-around;
+      gap: 10px;
       .videoControls__playBtn {
-        margin: 0px 15px;
+        &:hover {
+          cursor: pointer;
+        }
       }
       .videoControls__time {
         font-size: 12px;
       }
+      .videoControls__volume {
+        display: flex;
+        align-items: center;
+        span {
+          i {
+            font-size: 20px;
+          }
+        }
+        .volume_bar {
+          visibility: hidden;
+          opacity: 0;
+          width: 0;
+          transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        &:hover {
+          cursor: pointer;
+          .volume_bar {
+            visibility: visible;
+            opacity: 1;
+            transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+          }
+        }
+      }
     }
-    .videoControls__volume {
+    .video_status {
+      position: absolute;
+      width: 100%;
+      height: 25px;
+      top: -25px;
       display: flex;
       align-items: center;
-      span {
-        margin-left: 10px;
-        i {
-          font-size: 20px;
-        }
+      input[type="range"] {
+        width: 100%;
+        cursor: pointer;
+      }
+    }
+    .video_full {
+      display: flex;
+      align-items: center;
+      transition: transform 0.2s ease-in-out;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+        transition: transform 0.2s ease-in-out;
       }
     }
   }
