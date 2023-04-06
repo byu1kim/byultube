@@ -1,0 +1,14 @@
+extends layouts/main
+
+block content
+  .record
+    h1 Record Video
+    video#preview
+    button#startBtn Start Recording
+    button
+      a(href="/videos/upload") Go to Upload
+    if errorMessage
+      span= errorMessage
+
+block scripts
+  script(src="/static/js/recorder.js")

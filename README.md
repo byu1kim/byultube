@@ -11,7 +11,7 @@ Youtube clone app built in Node.js
 - MongoDB
 - Deployment : ?
 
-## Featuers
+## Features
 
 - Authentication with Passport.js
 - Updoad video
@@ -28,31 +28,33 @@ Youtube clone app built in Node.js
 
 # Todo
 
-- [ ] s3
+- [v] s3
 - [v] session time
 - [v] mobile style
 - [v] desktop style
-- [ ] comment crud
-- [ ] separte recording and uploading
+
+- [v] separte recording and uploading
 - [v] add profile image in home
-- [ ] add tags on the top
+- [v] add tags on the top
 - [v] profile to my channel
-- [ ] video upload on your studio page
+- [v] video upload on your studio page
+- [v] home : add created
+- [v] register : add image upload
+- [v] thumbnail
+- [v] responsive
+- [v] search
+- [v] delete video
+
+- [ ] comment crud
+- [ ] admin function
+- [ ] video player : status bar
+
 - [ ] file converter
+- [ ] download
 - [ ] send status code
 - [ ] like/dislike
 - [ ] subscribe (follwer/follow)
-- [ ] download
-- [ ] home : add created
-- [ ] register : add image upload
-- [ ] delete video
-- [ ] admin function
-- [ ] thumbnail
-
-- [v] responsive
 - [ ] dark/light mode
-
-- [ ] video player controller
 
 ##### Styles
 

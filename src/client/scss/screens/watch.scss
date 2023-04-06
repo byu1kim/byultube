@@ -1,3 +1,30 @@
+.watch {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  .detail {
+  }
+  .list {
+    .video-mixin {
+      display: flex;
+      gap: 10px;
+      .video-mixin__thumb {
+        height: 80px;
+      }
+    }
+    .video-photo {
+      display: none;
+    }
+  }
+}
+@media (max-width: "900px") {
+  .watch {
+    grid-template-columns: 1fr;
+    .list {
+      display: none;
+    }
+  }
+}
 .video__data {
   display: flex;
   flex-direction: column;
@@ -14,6 +41,10 @@
       height: 40px;
       background-color: lightgray;
       border-radius: 50%;
+      overflow: hidden;
+      img {
+        height: 100%;
+      }
     }
     .video_control {
       background-color: royalblue;
@@ -24,6 +55,12 @@
         background-color: midnightblue;
       }
     }
+    .delete {
+      background-color: red;
+      &:hover {
+        background-color: darkred;
+      }
+    }
   }
   .description {
     background-color: lightgray;
@@ -32,8 +69,52 @@
     margin: 20px 0;
   }
 }
-.video__add-comments {
+
+.video__add-comments,
+.video__comments {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  @include center();
+  .avatar {
+    width: 50px;
+    height: 50px;
+    @include center();
+    overflow: hidden;
+    img {
+      height: 100%;
+    }
+  }
+  .cmts {
+    width: 100%;
+    .top {
+      color: gray;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .content {
+      display: flex;
+      justify-content: space-between;
+      button {
+        margin: 5px;
+        background-color: transparent;
+        border: 1px solid royalblue;
+        color: royalblue;
+        border-radius: 20px;
+        padding: 5px 15px;
+        &:hover {
+          cursor: pointer;
+          background-color: lightgray;
+        }
+        &:last-child {
+          border-color: red;
+          color: red;
+        }
+      }
+    }
+  }
   form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     textarea {
@@ -50,30 +131,32 @@
     }
     button {
       margin-top: 10px;
-      padding: 5px;
+      padding: 5px 15px;
+      border-radius: 20px;
       align-self: flex-end;
       width: fit-content;
       border: none;
-      border-radius: 5px;
-      background-color: pink;
+      color: white;
+      background-color: royalblue;
       &:hover {
         cursor: pointer;
+        background-color: mediumblue;
       }
     }
   }
 }
-.video__comments {
-  display: flex;
-  flex-direction: column;
-  max-width: 320px;
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 20px;
-  .video__comment {
-    padding: 10px;
-    border-radius: 9999px;
-    background-color: white;
-    color: black;
-    margin-bottom: 10px;
-  }
-}
+// .video__comments {
+//   border: 2px solid red;
+//   display: flex;
+//   flex-direction: column;
+//   width: 100%;
+//   margin: 0 auto;
+//   margin-top: 20px;
+//   .video__comment {
+//     padding: 10px;
+//     border-radius: 9999px;
+//     background-color: white;
+//     color: black;
+//     margin-bottom: 10px;
+//   }
+// }

@@ -5,23 +5,42 @@ import Comment from "../models/Comment";
 // Home Page
 export const home = async (req, res) => {
   const videos = await Video.find({}).sort({ createdAt: "desc" }).populate("owner");
-  return res.render("home", { pageTitle: "Home", videos });
+
+  // tags : sort by number of tags
+  let tags = [];
+  videos.forEach((video) =>
+    video.hashtags.map((item) => {
+      if (!!tags.find((i) => i.name == item)) {
+        const index = tags.findIndex((i) => i.name == item);
+        tags[index].count++;
+      } else {
+        tags.push({ name: item, count: 1 });
+      }
+    })
+  );
+  tags.sort((a, b) => (a.count > b.count ? -1 : a.count < b.count ? 1 : 0));
+
+  return res.render("home", { pageTitle: "Home", videos, tags });
 };
 
 // Video Details
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner").populate("comments");
+  const video = await Video.findById(id)
+    .populate("owner")
+    .populate({ path: "comments", populate: { path: "owner" } });
+
+  const videos = await Video.find({}).sort({ createdAt: "desc" }).populate("owner");
 
   if (!video) {
     return res.render("404", { pageTitle: "Video not found." });
   }
-  return res.render("watch", { pageTitle: video.title, video });
+  return res.render("watch", { pageTitle: video.title, video, comments: video.comments, videos });
 };
 
 // GET : Create Video
 export const getUpload = (req, res) => {
-  return res.render("upload", { pageTitle: "Upload Video" });
+  return res.render("upload", { pageTitle: "Upload Video", video: {}, errorMessage: "" });
 };
 
 // POST : Create Video
@@ -29,15 +48,17 @@ export const postUpload = async (req, res) => {
   const {
     user: { _id },
   } = req.session;
-  const { location: fileUrl } = req.file;
+  const file = req.files;
   const { title, description, hashtags } = req.body;
 
+  console.log(req.files);
   try {
     // Create Video Object
     const newVideo = await Video.create({
       title,
       description,
-      fileUrl,
+      fileUrl: file.video[0].location,
+      thumbUrl: file.thumb ? file.thumb[0].location : "",
       owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });
@@ -57,6 +78,11 @@ export const postUpload = async (req, res) => {
       errorMessage: error._message,
     });
   }
+};
+
+// GET : Record Video
+export const getRecord = (req, res) => {
+  return res.render("record", { pageTitle: "Record Video", video: {}, errorMessage: "" });
 };
 
 // GET : Video Edit
@@ -85,9 +111,11 @@ export const postEdit = async (req, res) => {
     session: {
       user: { _id },
     },
-    body: { title, description, hashtags },
+    body: { title, description, hashtags, thumbUrl },
     file,
   } = req;
+
+  console.log(req.file);
 
   const video = await Video.findById({ _id: id });
   if (!video) {
@@ -101,7 +129,7 @@ export const postEdit = async (req, res) => {
 
   try {
     await Video.findByIdAndUpdate(id, {
-      //fileUrl: file ? file.location : "",
+      thumbUrl: file ? file.location : thumbUrl,
       title,
       description,
       hashtags: Video.formatHashtags(hashtags),
@@ -143,7 +171,7 @@ export const search = async (req, res) => {
       },
     }).populate("owner");
   }
-  return res.render("search", { pageTitle: "Search", videos });
+  return res.render("home", { pageTitle: "Search", videos, tags: [], keyword });
 };
 
 // API

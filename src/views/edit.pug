@@ -3,7 +3,7 @@ extends layouts/main
 block content
   .editvideo
     h1 Video details
-    form(method="POST")
+    form(method="POST", enctype="multipart/form-data")
       .form-field
         label(name="title") Title
         input(name="title", placeholder="Video Title", value=video.title, required)
@@ -20,6 +20,16 @@ block content
           value=video.hashtags.join()
         )
       .form-field
-        label(name="Thumbnail") Thumbnail
-        input(type="file", name="avatar", accept="image/*")
+        label(for="thumb") Thumbnail
+        .preview
+          if (video.thumbUrl)
+            img#img_output(src=video.thumbUrl)
+            input(name="thumbUrl", value=video.thumbUrl, hidden)
+          else
+            img#img_output(
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
+            )
+        input#thumb(type="file", name="thumb", accept="image/*")
       button(value="Save", type="submit") Save
+  block scripts
+    script(src="/static/js/upload.js")

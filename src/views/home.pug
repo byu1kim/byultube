@@ -3,8 +3,8 @@ include mixins/video
 
 block content
   .tags
-    .tag Tag1
-    .tag Tag2
+    each tag in tags  
+      .tag= tag.name
   .video-grid
     each video in videos
       +video(video)

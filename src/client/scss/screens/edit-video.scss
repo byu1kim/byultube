@@ -44,6 +44,12 @@
           outline: none;
         }
       }
+      .preview {
+        img {
+          margin-top: 10px;
+          height: 100px;
+        }
+      }
     }
 
     button {

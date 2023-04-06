@@ -1,13 +1,122 @@
-.upload__container {
-  width: 100%;
-  .upload__video {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    video {
-      max-width: 100%;
-      margin-bottom: 10px;
+// .upload__container {
+//   width: 100%;
+//   .upload__video {
+//     margin-bottom: 20px;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     video {
+//       max-width: 100%;
+//       margin-bottom: 10px;
+//     }
+//   }
+// }
+
+@media (min-width: "572px") {
+  .upload {
+    .box {
+      display: grid;
+      .preview {
+        order: 2;
+      }
+    }
+  }
+}
+
+.upload {
+  margin: auto;
+  max-width: 800px;
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(267px, 1fr));
+    gap: 20px;
+    .preview {
+      position: relative;
+      .placeholder {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: -1;
+      }
+      video {
+        width: 100%;
+      }
+      img {
+        margin-top: 10px;
+        height: 100px;
+      }
+      width: 100%;
+    }
+    form {
+      //width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .form-field {
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        padding: 0.5rem;
+        label {
+          font-size: 12px;
+          padding-bottom: 10px;
+        }
+        input {
+          width: 100%;
+          border: none;
+          padding: 5px 0;
+          font-size: 16px;
+          &:focus,
+          &:active {
+            border: none;
+            outline: none;
+          }
+        }
+        textarea {
+          font-family: sans-serif;
+          width: 100%;
+          resize: none;
+          border: none;
+          min-height: 100px;
+          padding: 5px 0;
+          &:focus,
+          &:active {
+            border: none;
+            outline: none;
+          }
+        }
+      }
+
+      button {
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        padding: 1rem;
+        background-color: royalblue;
+        color: white;
+        &:hover {
+          background-color: mediumblue;
+          cursor: pointer;
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+  .regi {
+    a {
+      color: royalblue;
+      &:hover {
+        color: mediumblue;
+      }
     }
   }
 }

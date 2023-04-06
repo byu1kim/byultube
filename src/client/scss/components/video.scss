@@ -5,18 +5,35 @@
     aspect-ratio: 16 / 9;
     border-radius: 10px;
     width: 100%;
-    background-color: ivory;
+    background-color: lightgray;
+    overflow: hidden;
+    @include center();
+    transition: transform 0.2s ease-in-out;
+    img {
+      width: 100%;
+    }
+    &:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s ease-in-out;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
   }
   .video-mixin__data {
     display: flex;
     margin-top: 1rem;
     .video-photo {
+      aspect-ratio: 1 / 1;
       background-color: lightgray;
       border: 2px;
       width: 50px;
       height: 50px;
       border-radius: 50%;
       margin-right: 10px;
+      overflow: hidden;
+      img {
+        height: 100%;
+        @include center();
+      }
     }
     .video-mixin__meta {
       line-height: 1;

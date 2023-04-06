@@ -1,2 +1,8 @@
 $red: #ff1300;
 $bg: #0e1117;
+
+@mixin center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

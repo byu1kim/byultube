@@ -1,51 +1,72 @@
 extends layouts/main
+include mixins/video
 
 block content
-  #videoContainer(data-id=video._id)
-    video(src=video.fileUrl)
-    #videoControls.videoControls
-      .videoControls__play
-        span#play.videoControls__playBtn
-          i.fas.fa-play
-        .videoControls__time
-          span#currenTime 00:00
-          span /
-          span#totalTime 00:00
-        .videoControls__volume
-          span#mute
-            i.fas.fa-volume-up
-          .volume_bar
-            input#volume(type="range", step="0.1", value=0.5, min="0", max="1")
-      .video_status
-        input#timeline.videoControls__timeline(type="range", step="1", value="0", min="0")
-      .video_full
-        span#fullScreen
-          i.fas.fa-expand
+  .watch
+    .detail
+      #videoContainer(data-id=video._id)
+        video(src=video.fileUrl)
+        #videoControls.videoControls
+          .videoControls__play
+            span#play.videoControls__playBtn
+              i.fas.fa-play
+            .videoControls__time
+              span#currenTime 00:00
+              span /
+              span#totalTime 00:00
+            .videoControls__volume
+              span#mute
+                i.fas.fa-volume-up
+              .volume_bar
+                input#volume(type="range", step="0.1", value=0.5, min="0", max="1")
+          .video_status
+            input#timeline.videoControls__timeline(type="range", step="1", value="0", min="0")
+          .video_full
+            span#fullScreen
+              i.fas.fa-expand
 
-  .video__data
-    .title= video.title
-    .profile
-      .photo
-      .video__owner Uploaded by
-        |
-        a(href=`/users/${video.owner._id}`)= video.owner.name
-      if loggedInUser._id == video.owner._id
-        .video_control
-          a(href=`/videos/${video._id}/edit`) Edit video
-    .description
-      small.video__createdAt= new Date(video.createdAt).toLocaleDateString("ko-kr", { weekday: "long", year: "numeric", month: "long", day: "numeric" })
-      div= video.description
-  if loggedIn
-    .video__add-comments
-      form#commentForm.video__comment-form
-        textarea(cols="30", rows="10", placeholder="Write a nice commment...")
-        button Comment
-  .video__comments
-    ul
-      each comment in video.comments.reverse()
-        li.video__comment
-          i.fas.fa-comment
-          span #{ comment.text }
+      .video__data
+        .title= video.title
+        .profile
+          .photo
+            img(src=video.owner.avatarUrl)
+          .video__owner Uploaded by&nbsp;
+            |
+            a(href=`/users/${video.owner._id}`)= video.owner.name
+          if loggedInUser._id == video.owner._id
+            .video_control
+              a(href=`/videos/${video._id}/edit`) Edit video
+            .video_control.delete
+              a(href=`/videos/${video._id}/delete`) Delete video
+        .description
+          small.video__createdAt= new Date(video.createdAt).toLocaleDateString("en-en", { weekday: "long", year: "numeric", month: "long", day: "numeric" })
+          div= video.description
+      if loggedIn
+        .video__add-comments
+          .avatar
+            img(src=loggedInUser.avatarUrl)
+          form#commentForm.video__comment-form
+            textarea(cols="30", rows="10", placeholder="Add a comment...")
+            button Comment
+      .video__comments
+        each comment in comments.reverse()
+          .avatar
+            img(src=comment.owner.avatarUrl)
+          .cmts
+            .top
+              span= comment.owner.username
+                span &nbsp;
+              span= new Date(comment.createdAt).toLocaleDateString("en-en", { year: "numeric", month: "numeric", day: "numeric" })
+            .content
+              .text= comment.text
+              .btns
+                button Edit
+                button Delete
+    .list
+      each video in videos
+        +video(video)
+      else
+        span.empty__message No videos found
 
 block scripts
   script(src="/static/js/videoPlayer.js")

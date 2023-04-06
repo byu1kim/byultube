@@ -1,0 +1,40 @@
+.record {
+  @include center();
+  flex-direction: column;
+  gap: 20px;
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  video {
+    margin: 1rem;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    height: 500px;
+  }
+  button {
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 1rem;
+    background-color: royalblue;
+    color: white;
+    &:hover {
+      background-color: mediumblue;
+      cursor: pointer;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+  }
+  .download {
+    background-color: green;
+    &:hover {
+      background-color: darkgreen;
+    }
+  }
+  .stop {
+    background-color: red;
+    &:hover {
+      background-color: darkred;
+    }
+  }
+}

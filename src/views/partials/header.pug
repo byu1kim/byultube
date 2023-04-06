@@ -1,11 +1,10 @@
 header
   .menu
-    .fas.fa-bars.menubar
     a.header__logo(href="/")
       i.fab.fa-youtube
   .search
-    form.search-form
-      input(name="search")
+    form.search-form(action="/search")
+      input(name="keyword", value=keyword)
       button.i.fas.fa-search
   nav
     if loggedIn
@@ -21,10 +20,20 @@ header
           a(href="/users/edit") Edit Profile
         li
           a(href="/users/logout") Sign Out
-      ul.profile
+      ul#videodrop.dropdown.video
         li
-          a(href="/videos/upload")
-            i.fas.fa-video
+          a(href="/videos/upload") Upload Video
+        li 
+          |
+          |
+          |
+          |
+          |
+          |
+          a(href="/videos/record") Record Video
+      ul.profile
+        li#startvideo
+          i.fas.fa-video
         li#profile.photo
           if loggedInUser.avatarUrl === ""
             span 😀

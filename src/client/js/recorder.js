@@ -15,12 +15,16 @@ const handleDownload = () => {
 
 const handleStop = () => {
   startBtn.innerText = "Download Recording";
+  startBtn.classList.remove("stop");
+  startBtn.classList.add("download");
   startBtn.removeEventListener("click", handleStop);
   startBtn.addEventListener("click", handleDownload);
   recorder.stop();
 };
+
 const handleStart = () => {
   startBtn.innerText = "Stop Recording";
+  startBtn.classList.add("stop");
   startBtn.removeEventListener("click", handleStart);
   startBtn.addEventListener("click", handleStop);
   recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
@@ -33,6 +37,7 @@ const handleStart = () => {
   };
   recorder.start();
 };
+
 const init = async () => {
   stream = await navigator.mediaDevices.getUserMedia({
     audio: false,
@@ -41,5 +46,7 @@ const init = async () => {
   video.srcObject = stream;
   video.play();
 };
+
 init();
+
 startBtn.addEventListener("click", handleStart);
